@@ -1,0 +1,12 @@
+:default_hostgroup:
+        :facts_map:
+                "Common/Loadbalancer":
+                        "hostname": "lb"
+                "Common/Database":
+                        "hostname": "db*"
+		"Common/WebserverNode":
+                        "hostname": "webnode"
+                "Common/Webserver":
+                        "hostname": "web*"
+                "Common/Memcache":
+                        "hostname": "mem"
