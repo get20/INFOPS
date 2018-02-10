@@ -27,7 +27,7 @@ superclass common {
                         apt-get -y install git
 
                         #Download puppet manifests via git
-                        git clone https://github.com/Loellis/INFOPS
+                        https://github.com/get20/INFOPS
 
 			#Apply puppet manifests
 			puppet apply /INFOPS/ssh_keys.pp
