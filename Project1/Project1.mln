@@ -1,0 +1,70 @@
+global {
+	project Project1
+}
+
+superclass common {
+	
+	openstack {
+		image Ubuntu16.04
+		flavor m1.medium
+		keypair main_master
+		
+		network eth0 {
+			netsys_net
+		}
+
+		user_data {
+
+			#Download and install puppet
+                        wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
+                        dpkg -i puppetlabs-release-pc1-xenial.deb
+                        apt-get update
+                        apt-get -y install puppet augeas-tools
+                        systemctl start puppet
+                        puppet --version
+
+                        #Download git
+                        apt-get -y install git
+
+                        #Download puppet manifests via git
+                        git clone https://github.com/Loellis/INFOPS
+
+			#Apply puppet manifests
+			puppet apply /INFOPS/ssh_keys.pp
+			puppet apply /INFOPS/puppet_agent.pp
+
+			#Enable puppet agent
+                        puppet agent --enable
+		}
+	}
+}
+
+
+host lb {
+	superclass common
+}
+
+host db1 {
+	superclass common
+}
+
+host db2 {
+	superclass common
+}
+
+host web1 {
+	superclass common
+}
+
+host web2 {
+	superclass common
+
+}
+
+host webnode {
+	superclass common
+}
+
+host mem {
+	superclass common
+}
